@@ -1,6 +1,6 @@
 # dashVizBuilder 计划表
 
-## Milestone1: 找一个 node/edge 的 graph库，用户可以轻松画图并保存。
+## Milestone 1: 找一个 node/edge 的 graph库，用户可以轻松画图并保存。
 具体来说：
 1. drag and drop 新的 node 进 canvas，node本身可以吸附式移动，node可以吸附式调节大小，node和node之间通过edge相连。
 2. 自定义几种预设的 node，比如 button，input，callback，每一种node都有各种child，child之间可以互相连接
@@ -38,6 +38,6 @@
 总的来说今天突破的难关比我想得多，对进程是比较满意的。
 
 
-## 2. 根据graph的输出，再次输出 dash 代码
+## Milestone 2: 根据graph的输出，code gen 出 dash 代码
 
 1. 根据输出的内容输出dash的layout，放入empty callback
