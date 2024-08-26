@@ -1,22 +1,31 @@
 <script lang="ts">
-    import { useSvelteFlow } from '@xyflow/svelte';
-  
-    const { toObject } = useSvelteFlow();
-      useSvelteFlow();
+    import { 
+      useSvelteFlow,      
+      useEdges,
+      useNodes } from '@xyflow/svelte';     
 
+    const nodes = useNodes();
+    const edges = useEdges();
+    const { toObject } = useSvelteFlow();
 
     function saveJson() {
-        let flowData = toObject();
-        const jsonString = JSON.stringify(flowData);
-        const blob = new Blob([jsonString], { type: 'application/json' });
+      console.log("nodes and edges")
+      console.log( nodes);
+      console.log( edges);
 
-        console.log(blob)
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'svelte-flow-graph.json';
-        a.click();
-        URL.revokeObjectURL(url);
+
+      let flowData = toObject();
+      const jsonString = JSON.stringify(flowData);
+      console.log(jsonString)
+
+      const blob = new Blob([jsonString], { type: 'application/json' });
+
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'svelte-flow-graph.json';
+      a.click();
+      URL.revokeObjectURL(url);
     } 
 
 

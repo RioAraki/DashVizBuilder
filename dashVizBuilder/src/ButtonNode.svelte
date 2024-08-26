@@ -41,9 +41,6 @@
     display: flex;
   }
 
-  .handle-container:last-child {
-  }
-
   /*TODO: connector placement is a bit misaligned */
   .onHoverText {
     visibility: hidden;

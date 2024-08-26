@@ -4,9 +4,6 @@
  
   type $$Props = NodeProps;
  
-  // export let data: { displayName: Writable<string> };
- 
-  // const { displayName: displayName } = data;
 </script>
  
 <div class="displaySetup">
@@ -33,9 +30,6 @@
   .handle-container {
     position: relative;
     display: flex;
-  }
-
-  .handle-container:last-child {
   }
 
   /*TODO: connector placement is a bit misaligned */
