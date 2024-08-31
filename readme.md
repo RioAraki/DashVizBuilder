@@ -1,6 +1,6 @@
-# dashVizBuilder 计划表
+# dashVizBuilder
 
-## Milestone 1: 找一个 node/edge 的 graph库，用户可以轻松画图并保存。
+## Stage 1: 找一个 node/edge 的 graph库，用户可以轻松画图并保存。
 具体来说：
 1. drag and drop 新的 node 进 canvas，node本身可以吸附式移动，node可以吸附式调节大小，node和node之间通过edge相连。
 2. 自定义几种预设的 node，比如 button，input，callback，每一种node都有各种child，child之间可以互相连接
@@ -18,7 +18,7 @@
 
 无论如何为了适应技术栈应该学习一下 SVELTE 怎么写
 
-#### Svelte Flow
+### Svelte Flow
 
 1. [这个来自 react flow 的demo 应该可以套用](https://codesandbox.io/p/sandbox/react-flow-add-node-button-l9rcu)
 2. This is the whole point of the library
@@ -26,9 +26,19 @@
 
 感觉理论上这个方案是行得通的。
 
-### 工作记录
+## Milestone of Stage 1
+1. Drag and drop Add node, 可以先用目前的 button 代替
+2. Node editing, 可以 in place edit，但之后要调整的东西多难免要放到右侧，edit的内容要能够被记录
 
-#### 2024-08-24
+## Stage 2: 根据graph的输出，code gen 出 dash 代码
+
+1. 根据输出的内容输出dash的layout，放入empty callback
+
+
+
+## 工作记录
+
+### 2024-08-24
 
 用一天时间初步用 Svelte 实现了用按钮加node，自定义各种node，以及导出成json。目前看来技术方案基本敲定了，每个大流程都能跑通，接下来还有些问题要克服：
     1. callback generates new HTML (无法直接建出所有的 html 节点)。
@@ -37,7 +47,6 @@
 
 总的来说今天突破的难关比我想得多，对进程是比较满意的。
 
+### 2024-08-26
 
-## Milestone 2: 根据graph的输出，code gen 出 dash 代码
-
-1. 根据输出的内容输出dash的layout，放入empty callback
+实现了右键 delete node

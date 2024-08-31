@@ -17,9 +17,7 @@
       let flowData = toObject();
       const jsonString = JSON.stringify(flowData);
       console.log(jsonString)
-
       const blob = new Blob([jsonString], { type: 'application/json' });
-
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;

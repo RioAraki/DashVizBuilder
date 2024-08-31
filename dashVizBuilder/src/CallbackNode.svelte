@@ -1,39 +1,26 @@
 <script lang="ts">
-  import { Handle, Position, type NodeProps } from '@xyflow/svelte';
-  import type { Writable } from 'svelte/store';
- 
-  type $$Props = NodeProps;
- 
-  export let data: { callbackName: Writable<string> };
- 
-  const { callbackName: callbackName } = data;
+    import { Handle, Position } from '@xyflow/svelte';  
+    export let data: { callbackName: string };
 </script>
  
 <div class="callbackSetup">
 
   <div>
-    Callback Name: <strong>{$callbackName}</strong>
+    Callback Name: <strong>{data.callbackName}</strong>
   </div>
 
   <div class="handle-container">
-    <Handle type="target" position={Position.Left} />
+    <Handle id="input" type="target" position={Position.Left} />
     <div class="onHoverText">input</div>
   </div>  
   
   <div class="handle-container">
-    <Handle type="target" position={Position.Top} />
+    <Handle id="state" type="target" position={Position.Top} />
     <div class="onHoverText">state</div>
   </div>
 
-
-  <input
-    class="nodrag"
-    type="text"
-    on:input={(evt) => data.callbackName.set(evt.target?.value)}
-  />
-
   <div class="handle-container">
-    <Handle type="source" position={Position.Right} />
+    <Handle id="output" type="source" position={Position.Right} />
     <div class="onHoverText">output</div>
   </div>
 

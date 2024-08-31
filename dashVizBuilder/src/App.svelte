@@ -19,11 +19,13 @@ import CallbackNode from './CallbackNode.svelte';
 import ContextMenu from './ContextMenu.svelte';
 import DisplayNode from './DisplayNode.svelte';
 import SaveJsonButton from './saveJsonButton.svelte';
+import InputNode from './InputNode.svelte';
 
 const nodeTypes = {
     'button': ButtonNode,
     'callback': CallbackNode,
     'display': DisplayNode,
+    'input': InputNode,
 };
 
 const nodes = writable < Node[] > ([]);
@@ -36,12 +38,13 @@ let width: number;
 let height: number;
 
 let instance;
+let selectedNode = writable<string | null>(null);
 
 // Function to add a new node
 function addButtonNode() {
     nodes.update((n) => {
         const newNodeId = `Button${(n.length+1)}`
-        const newNode: Node = {
+        var newNode: Node = {
             id: newNodeId,
             type: 'button',
             data: {
@@ -80,7 +83,7 @@ function addGraphNode() {
             const newNode: Node = {
                 id: newNodeId,
                 data: {
-                    label: `${newNodeId}`
+                    graphName: writable("")
                 },
                 position: {
                     x: Math.random() * 200,
@@ -91,13 +94,35 @@ function addGraphNode() {
     });
 }
 
+function addInputNode() {
+    nodes.update((n) => {
+            const newNodeId = `Input${(n.length+1)}`
+            const newNode: Node = {
+                id: newNodeId,
+                type: 'input',
+                data: {
+                    inputName: writable(""),
+                    inputType: writable("")
+                },
+                position: {
+                    x: Math.random() * 200,
+                    y: Math.random() * 200
+                },
+            };
+            return [...n, newNode];
+    });
+}
+
+
 function addDisplayNode() {
     nodes.update((n) => {
         const newNodeId = `DisplayArea${(n.length+1)}`
         const newNode: Node = {
             id: newNodeId,
             type: 'display',
-            data: {},
+            data: {
+                areaText:  writable("")
+            },
             position: {
                 x: Math.random() * 200,
                 y: Math.random() * 200
@@ -107,23 +132,15 @@ function addDisplayNode() {
     });
 }
 
-
-
 function handleContextMenu({ detail: { event, node } }) {
     // Prevent native context menu from showing
     event.preventDefault();
-
-    // Calculate position of the context menu. We want to make sure it
-    // doesn't get positioned off-screen.
-
-
-
     menu = {
-    id: node.id,
-    top: event.clientY < height - 200 ? event.clientY : undefined,
-    left: event.clientX < width - 200 ? event.clientX : undefined,
-    right: event.clientX >= width - 200 ? width - event.clientX : undefined,
-    bottom: event.clientY >= height - 200 ? height - event.clientY : undefined
+        id: node.id,
+        top: event.clientY < height - 200 ? event.clientY : undefined,
+        left: event.clientX < width - 200 ? event.clientX : undefined,
+        right: event.clientX >= width - 200 ? width - event.clientX : undefined,
+        bottom: event.clientY >= height - 200 ? height - event.clientY : undefined
     };
     console.log("menu?", menu)
 }
@@ -133,24 +150,67 @@ function handlePaneClick() {
     menu = null;
 }
 
+function handleNodeClick({ detail: { node } }) {
+    // Extract the data from the clicked node and set it to be displayed
+    selectedNode.set(node);
+}
+
+function handleInputChange(key: string, value: string) {
+    // Update the selected node's data when input changes
+    selectedNode.update((node) => {
+        if (node) {
+            node.data[key] = value;
+            // Update the nodes store with the modified node data
+            nodes.update((n) =>
+                n.map((nd) => (nd.id === node.id ? { ...nd, data: { ...node.data } } : nd))
+            );
+        }
+        return node;
+    });
+}
+
+
 </script>
 
-<div style="height:80vh;" bind:clientWidth={width} bind:clientHeight={height}>
+<div style="height:100vh;" bind:clientWidth={width} bind:clientHeight={height}>
 
     <SvelteFlowProvider>
         <button on:click={addButtonNode}>Add Button Node</button>
         <button on:click={addCallbackNode}>Add Callback Node</button>
         <button on:click={addGraphNode}>Add Graph Node</button>
         <button on:click={addDisplayNode}>Add Text Dsiplay Node</button>
+        <button on:click={addInputNode}>Add Input Node</button>
+
+        <div class="nodeEditor">
+            {#if $selectedNode}
+                {#each Object.entries($selectedNode.data) as [key, value]}
+                    <div class="inputGroup">
+                        <label for={key}>{key}:</label>
+                        <input
+                            id={key}
+                            type="text"
+                            value={value}
+                            on:input={(e) => handleInputChange(key, e.target.value)}
+                        />
+                    </div>
+                {/each}
+            {:else}
+                display some text for now
+            {/if}
+        </div>
+
+
+
         <SaveJsonButton />
         <SvelteFlow
-            {nodeTypes}
-            {nodes}
-            {edges}
-            on:nodecontextmenu={handleContextMenu}
-            on:paneclick={handlePaneClick}
-            fitView
-            bind:this={instance}>
+        {nodeTypes}
+        {nodes}
+        {edges}
+        on:nodecontextmenu={handleContextMenu}
+        on:paneclick={handlePaneClick}
+        on:nodeclick={handleNodeClick}
+        fitView
+        bind:this={instance}>
             <Controls />
             <Background />
             {#if menu}
@@ -167,3 +227,22 @@ function handlePaneClick() {
         </SvelteFlow>
     </SvelteFlowProvider>
 </div>
+
+<style>
+    .nodeEditor {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        z-index: 999;
+    }
+
+    .inputGroup {
+        margin-bottom: 10px;
+    }
+
+    .inputGroup label {
+        margin-right: 10px;
+        font-weight: bold;
+    }
+</style>

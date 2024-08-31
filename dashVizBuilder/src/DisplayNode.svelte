@@ -1,20 +1,21 @@
 <script lang="ts">
-  import { Handle, Position, type NodeProps } from '@xyflow/svelte';
-  import type { Writable } from 'svelte/store';
- 
-  type $$Props = NodeProps;
- 
+  import { Handle, Position } from '@xyflow/svelte'; 
 </script>
  
 <div class="displaySetup">
 
-  <div>
-    DisplayArea
+  <div class="output">
+    Display
   </div>
 
   <div class="handle-container">
-    <Handle type="target" position={Position.Left} />
-    <div class="onHoverText">input</div>
+    <Handle id="children_in" type="target" position={Position.Left} />
+    <div class="onHoverText">children_in</div>
+  </div>
+
+  <div class="handle-container">
+    <Handle id="children_out" type="source" position={Position.Right} />
+    <div class="onHoverText">children_out</div>
   </div>
 
 </div>
