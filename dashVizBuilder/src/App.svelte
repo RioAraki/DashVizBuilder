@@ -17,14 +17,14 @@ import '@xyflow/svelte/dist/style.css';
 import ButtonNode from './ButtonNode.svelte';
 import CallbackNode from './CallbackNode.svelte';
 import ContextMenu from './ContextMenu.svelte';
-import DisplayNode from './DisplayNode.svelte';
-import SaveJsonButton from './saveJsonButton.svelte';
+import DivNode from './DivNode.svelte';
+import SaveJsonButton from './SaveJsonButton.svelte';
 import InputNode from './InputNode.svelte';
 
 const nodeTypes = {
     'button': ButtonNode,
     'callback': CallbackNode,
-    'display': DisplayNode,
+    'div': DivNode,
     'input': InputNode,
 };
 
@@ -114,14 +114,14 @@ function addInputNode() {
 }
 
 
-function addDisplayNode() {
+function addDivNode() {
     nodes.update((n) => {
-        const newNodeId = `DisplayArea${(n.length+1)}`
+        const newNodeId = `Div${(n.length+1)}`
         const newNode: Node = {
             id: newNodeId,
-            type: 'display',
+            type: 'div',
             data: {
-                areaText:  writable("")
+                divId:  writable("")
             },
             position: {
                 x: Math.random() * 200,
@@ -178,7 +178,7 @@ function handleInputChange(key: string, value: string) {
         <button on:click={addButtonNode}>Add Button Node</button>
         <button on:click={addCallbackNode}>Add Callback Node</button>
         <button on:click={addGraphNode}>Add Graph Node</button>
-        <button on:click={addDisplayNode}>Add Text Dsiplay Node</button>
+        <button on:click={addDivNode}>Add Div Node</button>
         <button on:click={addInputNode}>Add Input Node</button>
 
         <div class="nodeEditor">

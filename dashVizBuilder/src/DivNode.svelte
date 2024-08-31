@@ -1,11 +1,13 @@
 <script lang="ts">
   import { Handle, Position } from '@xyflow/svelte'; 
+  export let data: { divId: string };
+
 </script>
  
-<div class="displaySetup">
+<div class="divSetup">
 
   <div class="output">
-    Display
+    Div ID: <strong>{data.divId}</strong>
   </div>
 
   <div class="handle-container">
@@ -21,7 +23,7 @@
 </div>
  
 <style>
-  .displaySetup {
+  .divSetup {
     padding: 0.5rem;
     background: #eee;
     border-radius: 0.125rem;
