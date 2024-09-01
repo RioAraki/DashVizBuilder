@@ -1,0 +1,137 @@
+{
+    "nodes": [
+        {
+            "id": "button1",
+            "type": "button",
+            "data": {
+                "id": "increment"
+            },
+            "position": {
+                "x": -82.51185120443796,
+                "y": -204.5026312659417
+            },
+            "measured": {
+                "width": 129,
+                "height": 33
+            },
+            "selected": false,
+            "dragging": false
+        },
+        {
+            "id": "button2",
+            "type": "button",
+            "data": {
+                "id": "reset"
+            },
+            "position": {
+                "x": -128.38384840787265,
+                "y": -146.3849124314358
+            },
+            "measured": {
+                "width": 100,
+                "height": 33
+            },
+            "selected": false,
+            "dragging": false
+        },
+        {
+            "id": "Input3",
+            "type": "input",
+            "data": {
+                "id": "offset",
+                "type": "number"
+            },
+            "position": {
+                "x": -65.0589829754623,
+                "y": -337.22558177060046
+            },
+            "measured": {
+                "width": 150,
+                "height": 94
+            },
+            "selected": false,
+            "dragging": false
+        },
+        {
+            "id": "callback4",
+            "type": "callback",
+            "data": {
+                "id": "update_value"
+            },
+            "position": {
+                "x": 87.68456541386547,
+                "y": -136.10742959527505
+            },
+            "measured": {
+                "width": 153,
+                "height": 33
+            },
+            "selected": false,
+            "dragging": false
+        },
+        {
+            "id": "Div5",
+            "type": "div",
+            "data": {
+                "id": "display"
+            },
+            "position": {
+                "x": 270.17081286997984,
+                "y": -117.56846904244577
+            },
+            "measured": {
+                "width": 91,
+                "height": 33
+            },
+            "selected": false,
+            "dragging": false
+        }
+    ],
+    "edges": [
+        {
+            "source": "button1",
+            "sourceHandle": "n_clicks",
+            "target": "callback4",
+            "targetHandle": "input",
+            "id": "xy-edge__button1n_clicks-callback4input",
+            "selected": false
+        },
+        {
+            "source": "button2",
+            "sourceHandle": "n_clicks",
+            "target": "callback4",
+            "targetHandle": "input",
+            "id": "xy-edge__button2n_clicks-callback4input",
+            "selected": false
+        },
+        {
+            "source": "Input3",
+            "sourceHandle": "value",
+            "target": "callback4",
+            "targetHandle": "input",
+            "id": "xy-edge__Input3value-callback4input",
+            "selected": false
+        },
+        {
+            "source": "callback4",
+            "sourceHandle": "output",
+            "target": "Div5",
+            "targetHandle": "children",
+            "id": "xy-edge__callback4output-Div5children",
+            "selected": false
+        },
+        {
+            "source": "Div5",
+            "sourceHandle": "children",
+            "target": "callback4",
+            "targetHandle": "state",
+            "id": "xy-edge__Div5children-callback4state",
+            "selected": false
+        }
+    ],
+    "viewport": {
+        "x": 600.2389298502602,
+        "y": 1028.3956846541953,
+        "zoom": 2
+    }
+}

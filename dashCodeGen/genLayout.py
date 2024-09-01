@@ -1,12 +1,12 @@
 def button_layout(node):
     data = node["data"]
 
-    buttonName = data.get("buttonName", "")
+    id = data.get("id", "")
 
     return f"""
 html.Button(
-    "{buttonName}",
-    id="button_{buttonName}",
+    "{id}",
+    id="{id}",
     n_clicks=0
 )
 """
@@ -14,15 +14,15 @@ html.Button(
 
 def input_layout(node):
     data = node["data"]
-    input_name = data.get("inputName", "")
-    input_type = data.get("inputType", "")
+    id = data.get("id", "")
+    type = data.get("type", "")
     placeholder = data.get("placeholder", "")
     value = data.get("value", "")
 
     return f"""
 dcc.Input(
-    id="{input_name}",
-    type="{input_type}",
+    id="{id}",
+    type="{type}",
     placeholder="{placeholder}",
     value="{value}"
 )
@@ -31,11 +31,11 @@ dcc.Input(
 
 def div_layout(node):
     data = node["data"]
-    div_id = data.get("divId", "")
+    id = data.get("id", "")
 
     return f"""
 html.Div(
-    id="{div_id}"
+    id="{id}"
 )
 """
 
@@ -49,12 +49,11 @@ def div_wrap(content):
     ),
 """
 
-def generate_layout(node_list):
+def generate_layout(nodes):
     content = """"""
 
 
-
-    for node in node_list:
+    for node in nodes.get_all():
         if node["type"] == "button":
             content += div_wrap(button_layout(node))
         elif node["type"] == "input":

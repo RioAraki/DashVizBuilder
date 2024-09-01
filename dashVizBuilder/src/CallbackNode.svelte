@@ -1,12 +1,12 @@
 <script lang="ts">
     import { Handle, Position } from '@xyflow/svelte';  
-    export let data: { callbackName: string };
+    export let data: { id: string };
 </script>
  
 <div class="callbackSetup">
 
   <div>
-    Callback Name: <strong>{data.callbackName}</strong>
+    callback id: <strong>{data.id}</strong>
   </div>
 
   <div class="handle-container">

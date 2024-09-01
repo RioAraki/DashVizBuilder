@@ -1,23 +1,23 @@
 <script lang="ts">
   import { Handle, Position } from '@xyflow/svelte'; 
-  export let data: { divId: string };
+  export let data: { id: string };
 
 </script>
  
 <div class="divSetup">
 
   <div class="output">
-    Div ID: <strong>{data.divId}</strong>
+    div id: <strong>{data.id}</strong>
   </div>
 
   <div class="handle-container">
-    <Handle id="children_in" type="target" position={Position.Left} />
-    <div class="onHoverText">children_in</div>
+    <Handle id="children" type="target" position={Position.Left} />
+    <div class="onHoverText">children</div>
   </div>
 
   <div class="handle-container">
-    <Handle id="children_out" type="source" position={Position.Right} />
-    <div class="onHoverText">children_out</div>
+    <Handle id="children" type="source" position={Position.Right} />
+    <div class="onHoverText">children</div>
   </div>
 
 </div>

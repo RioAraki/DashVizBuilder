@@ -1,12 +1,15 @@
 <script lang="ts">
     import { Handle, Position } from '@xyflow/svelte';
-    export let data: { inputName: string, inputType: string };
+    export let data: { id: string, type: string };
 </script>
  
-<div class="InputSetup">
+<div class="inputSetup">
     <div>
-        <p>Input: <strong>{data.inputName}</strong></p>
-        <p>Type: {data.inputType}</p>
+        <p>
+            input id: <strong>{data.id}</strong>
+            <br/>
+            type: {data.type}
+        </p>
     </div>
     
     <div class="handle-container">
@@ -16,7 +19,7 @@
 </div>
  
 <style>
-    .InputSetup {
+    .inputSetup {
         padding: 0.5rem;
         background: #eee;
         border-radius: 0.125rem;

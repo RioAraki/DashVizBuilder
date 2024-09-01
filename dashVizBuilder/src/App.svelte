@@ -43,12 +43,12 @@ let selectedNode = writable<string | null>(null);
 // Function to add a new node
 function addButtonNode() {
     nodes.update((n) => {
-        const newNodeId = `Button${(n.length+1)}`
+        const newNodeId = `button${(n.length+1)}`
         var newNode: Node = {
             id: newNodeId,
             type: 'button',
             data: {
-                buttonName: writable("")
+                id: `button${(n.length+1)}`,
             },
             position: {
                 x: Math.random() * 200,
@@ -61,12 +61,12 @@ function addButtonNode() {
 
 function addCallbackNode() {
     nodes.update((n) => {
-        const newCallbackNodeId = `Callback${(n.length+1)}`
+        const newCallbackNodeId = `callback${(n.length+1)}`
         const newNode: Node = {
             id: newCallbackNodeId,
             type: 'callback',
             data: {
-                callbackName: writable("")
+                id: `callback${(n.length+1)}`
             },
             position: {
                 x: Math.random() * 200,
@@ -83,7 +83,7 @@ function addGraphNode() {
             const newNode: Node = {
                 id: newNodeId,
                 data: {
-                    graphName: writable("")
+                    id:`Graph${(n.length+1)}`
                 },
                 position: {
                     x: Math.random() * 200,
@@ -101,8 +101,8 @@ function addInputNode() {
                 id: newNodeId,
                 type: 'input',
                 data: {
-                    inputName: writable(""),
-                    inputType: writable("")
+                    id: `Input${(n.length+1)}`,
+                    type: "text"
                 },
                 position: {
                     x: Math.random() * 200,
@@ -121,7 +121,7 @@ function addDivNode() {
             id: newNodeId,
             type: 'div',
             data: {
-                divId:  writable("")
+                id:`Div${(n.length+1)}`
             },
             position: {
                 x: Math.random() * 200,
@@ -183,6 +183,7 @@ function handleInputChange(key: string, value: string) {
 
         <div class="nodeEditor">
             {#if $selectedNode}
+                <p>{$selectedNode.id}</p>
                 {#each Object.entries($selectedNode.data) as [key, value]}
                     <div class="inputGroup">
                         <label for={key}>{key}:</label>

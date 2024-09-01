@@ -1,14 +1,13 @@
 <script lang="ts">
     import { Handle, Position } from '@xyflow/svelte';
-    export let data: { buttonName: string };
+    export let data: { id: string };
 </script>
  
 <div class="buttonSetup">
 
     <div>
-        Button: <strong>{data.buttonName}</strong>
+        button id: <strong>{data.id}</strong>
     </div>
-
 
     <div class="handle-container">
         <Handle id="n_clicks" type="source" position={Position.Right} />

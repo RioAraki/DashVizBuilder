@@ -20,5 +20,5 @@ register_callbacks_to_app(app)
 if __name__ == '__main__':
     app.run_server(debug=True)
 """
-    with open("app.py", "w") as file:
+    with open("./output/app.py", "w") as file:
         file.write(content)
