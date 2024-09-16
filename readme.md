@@ -33,20 +33,3 @@
 ## Stage 2: 根据graph的输出，code gen 出 dash 代码
 
 1. 根据输出的内容输出dash的layout，放入empty callback
-
-
-
-## 工作记录
-
-### 2024-08-24
-
-用一天时间初步用 Svelte 实现了用按钮加node，自定义各种node，以及导出成json。目前看来技术方案基本敲定了，每个大流程都能跑通，接下来还有些问题要克服：
-    1. callback generates new HTML (无法直接建出所有的 html 节点)。
-    2. 多个源头都指向input/output。
-    3. node的位置表示其最后在UI里的真实位置。
-
-总的来说今天突破的难关比我想得多，对进程是比较满意的。
-
-### 2024-08-26
-
-实现了右键 delete node
