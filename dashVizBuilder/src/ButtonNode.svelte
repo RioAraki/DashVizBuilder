@@ -7,26 +7,22 @@
 
     <div>
         button id: <strong>{data.id}</strong>
-    </div>
-
-    <div class="handle-container">
-        <Handle id="n_clicks" type="source" position={Position.Right} />
-        <div class="onHoverText">n_clicks</div>
+        <div class="connector">
+            <Handle id="n_clicks" type="source" position={Position.Right} />
+            <div class="onHoverText">n_clicks</div>
+        </div>
     </div>
 
 </div>
  
 <style>
     .buttonSetup {
-        padding: 0.5rem;
-        background: #eee;
-        border-radius: 0.125rem;
-        font-size: 0.7rem;
-    }
-
-    .handle-container {
-        position: relative;
-        display: flex;
+        position: absolute;
+        padding: 1rem;
+        border: 1px solid #00aeff;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        background: white;
     }
 
     /*TODO: connector placement is a bit misaligned */
@@ -48,7 +44,7 @@
         white-space: nowrap;
     }
 
-    .handle-container:hover .onHoverText {
+    .connector:hover .onHoverText {
         visibility: visible;
         opacity: 1;
     }

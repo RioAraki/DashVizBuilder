@@ -5,9 +5,9 @@ import {
 import {
     SvelteFlow,
     SvelteFlowProvider,
-    useSvelteFlow,
     Controls,
     Background,
+    BackgroundVariant,
     MiniMap,
     type Node,
     type Edge,
@@ -54,6 +54,8 @@ function addButtonNode() {
                 x: Math.random() * 200,
                 y: Math.random() * 200
             },
+            width: 150,
+            height: 100,
         };
         return [...n, newNode];
     });
@@ -72,6 +74,8 @@ function addCallbackNode() {
                 x: Math.random() * 200,
                 y: Math.random() * 200
             },
+            width: 150,
+            height: 100,
         };
         return [...n, newNode];
     });
@@ -89,6 +93,8 @@ function addGraphNode() {
                     x: Math.random() * 200,
                     y: Math.random() * 200
                 },
+                width: 150,
+                height: 100,
             };
             return [...n, newNode];
     });
@@ -108,6 +114,8 @@ function addInputNode() {
                     x: Math.random() * 200,
                     y: Math.random() * 200
                 },
+                width: 150,
+                height: 100,
             };
             return [...n, newNode];
     });
@@ -127,6 +135,8 @@ function addDivNode() {
                 x: Math.random() * 200,
                 y: Math.random() * 200
             },
+            width: 150,
+            height: 100,
         };
         return [...n, newNode];
     });
@@ -169,6 +179,19 @@ function handleInputChange(key: string, value: string) {
     });
 }
 
+const handleNodeDragStop = (event) => {
+  let node = event.detail.targetNode;
+  selectedNode.set(node);
+
+  node.position = {
+    x: Math.round(node.position.x / 50) * 50,
+    y: Math.round(node.position.y / 50) * 50
+  };
+
+  nodes.update((n) =>
+      n.map((nd) => (nd.id === node.id ? { ...nd, position: { ...node.position } } : nd))
+  );
+};
 
 </script>
 
@@ -208,12 +231,13 @@ function handleInputChange(key: string, value: string) {
         {nodes}
         {edges}
         on:nodecontextmenu={handleContextMenu}
+        on:nodedragstop={handleNodeDragStop}
         on:paneclick={handlePaneClick}
         on:nodeclick={handleNodeClick}
         fitView
         bind:this={instance}>
             <Controls />
-            <Background />
+            <Background variant={BackgroundVariant.Lines} gap=50/>
             {#if menu}
                 <ContextMenu
                     onClick={handlePaneClick}

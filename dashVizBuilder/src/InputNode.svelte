@@ -20,10 +20,12 @@
  
 <style>
     .inputSetup {
-        padding: 0.5rem;
-        background: #eee;
-        border-radius: 0.125rem;
-        font-size: 0.7rem;
+        position: absolute;
+        padding: 1rem;
+        border: 1px solid #00aeff;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        background: white;
     }
 
     .handle-container {
