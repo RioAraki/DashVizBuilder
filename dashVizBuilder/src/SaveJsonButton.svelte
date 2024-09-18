@@ -9,11 +9,6 @@
     const { toObject } = useSvelteFlow();
 
     function saveJson() {
-      console.log("nodes and edges")
-      console.log( nodes);
-      console.log( edges);
-
-
       let flowData = toObject();
       const jsonString = JSON.stringify(flowData);
       console.log(jsonString)

@@ -19,6 +19,7 @@ import CallbackNode from './CallbackNode.svelte';
 import ContextMenu from './ContextMenu.svelte';
 import DivNode from './DivNode.svelte';
 import SaveJsonButton from './SaveJsonButton.svelte';
+import LoadButton from './LoadButton.svelte';
 import InputNode from './InputNode.svelte';
 
 const nodeTypes = {
@@ -226,6 +227,7 @@ const handleNodeDragStop = (event) => {
 
 
         <SaveJsonButton />
+        <LoadButton />
         <SvelteFlow
         {nodeTypes}
         {nodes}
