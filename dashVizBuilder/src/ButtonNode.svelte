@@ -1,28 +1,53 @@
 <script lang="ts">
-    import { Handle, Position } from '@xyflow/svelte';
+    import { Handle, Position, NodeResizer, type NodeProps, } from '@xyflow/svelte';
+    import { nodes } from './Stores';
+
     export let data: { id: string };
+
+    type $$Props = NodeProps;
+    export let selected: $$Props['selected'] = undefined;
+    export let nodeWidth: $$Props['width'] = undefined;
+    export let nodeHeight: $$Props['height'] = undefined;
+
+    const handleResizeEnd = (event, params) => {
+        console.log("onResizeEnd");
+        console.log(params);
+        let adjustW = Math.round(params.width / 50) * 50;
+        let adjustH =  Math.round(params.height / 50) * 50;
+
+        nodes.update((n) => {
+            return n.map((node) =>
+                node.id === data.id
+                    ? { ...node, width: adjustW, height: adjustH }
+                    : node
+            );
+        });
+
+    };
+
 </script>
  
-<div class="buttonSetup">
-
-    <div>
-        button id: <strong>{data.id}</strong>
-        <div class="connector">
-            <Handle id="n_clicks" type="source" position={Position.Right} />
-            <div class="onHoverText">n_clicks</div>
+<NodeResizer 
+    minWidth={100} 
+    minHeight={50}
+    isVisible={selected} 
+    color="rgb(255, 64, 0)" 
+    onResizeEnd={handleResizeEnd}
+/>
+    <div class="buttonSetup">
+        <div>
+            button id: <strong>{data.id}</strong>
+            <div class="connector">
+                <Handle id="n_clicks" type="source" position={Position.Right} />
+                <div class="onHoverText">n_clicks</div>
+            </div>
         </div>
     </div>
-
-</div>
  
 <style>
     .buttonSetup {
-        position: absolute;
         padding: 1rem;
-        border: 1px solid #00aeff;
-        border-radius: 10px;
         font-size: 0.9rem;
-        background: white;
     }
 
     /*TODO: connector placement is a bit misaligned */

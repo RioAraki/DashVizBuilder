@@ -21,6 +21,7 @@ import DivNode from './DivNode.svelte';
 import SaveJsonButton from './SaveJsonButton.svelte';
 import LoadButton from './LoadButton.svelte';
 import InputNode from './InputNode.svelte';
+import { nodes, edges } from './Stores';
 
 const nodeTypes = {
     'button': ButtonNode,
@@ -28,9 +29,6 @@ const nodeTypes = {
     'div': DivNode,
     'input': InputNode,
 };
-
-const nodes = writable < Node[] > ([]);
-const edges = writable < Edge[] > ([]);
 
 let menu: {
     id: string;top ? : number;left ? : number;right ? : number;bottom ? : number
@@ -40,6 +38,8 @@ let height: number;
 
 let instance;
 let selectedNode = writable<string | null>(null);
+
+const buttonNodeStyle = 'background: #fff; border: 1px solid black; border-radius: 15px;';
 
 // Function to add a new node
 function addButtonNode() {
@@ -57,6 +57,7 @@ function addButtonNode() {
             },
             width: 150,
             height: 100,
+            style: buttonNodeStyle
         };
         return [...n, newNode];
     });
